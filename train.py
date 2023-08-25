@@ -33,10 +33,11 @@ warnings.filterwarnings(action="ignore")
 
 if __name__ == "__main__":
     logger.info("Loading data...")
-    train_df = pd.read_csv(os.path.join(DATA_PATH, "house_rent_train.csv"))
+    train_df = pd.read_csv(os.path.join(DATA_PATH, "bike_sharing_train.csv"))
 
-    _X = train_df.drop(["rent", "area_locality", "posted_on"], axis=1)
-    y = np.log1p(train_df["rent"])
+    #_X = train_df.drop(["rent", "area_locality", "posted_on"], axis=1)
+    _X = train_df.drop(["datetime","count"], axis=1)
+    y = np.log1p(train_df["count"])
 
     # save preprocess pipelined X=_X, y=y to X
     logger.info("Applying a pipeline...")
@@ -48,7 +49,7 @@ if __name__ == "__main__":
         os.makedirs(os.path.join(DATA_PATH, "storage"))
     X.assign(rent=y).to_csv(
         # save feature data in DATA_PATH/storage
-        os.path.join(DATA_PATH, "storage", "house_rent_train_features.csv"),
+        os.path.join(DATA_PATH, "storage", "bike_sharing_features.csv"),
         index=False,
     )
 
@@ -143,7 +144,7 @@ if __name__ == "__main__":
 
     # BentoML에 모델 저장
     bentoml.sklearn.save_model(
-        name="house_rent",
+        name="bike_sharing",
         model=mlflow.sklearn.load_model(best_model_uri),  # uri of best model
         signatures={"predict": {"batchable": True, "batch_dim": 0}},
         metadata=best_params,
