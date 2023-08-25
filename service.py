@@ -18,17 +18,18 @@ class Features(BaseModel):
     bathroom: int
     point_of_contact: str
     """
-    datetime: str
+    # datetime: str
     season: int
     holiday: int
     workingday: int
     weather: int
+    
     temp: float
     atemp: float
     humidity: int
     windspeed: float
-    count: int
-    dtype: str
+    # count: int
+    # dtype: str
 
 
 # 학습 코드에서 저장한 베스트 모델을 가져올 것 (bike_sharing:latest)

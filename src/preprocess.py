@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 # from category_encoders import TargetEncoder
-# from sklearn.compose import ColumnTransformer
+from sklearn.compose import ColumnTransformer
 # from sklearn.preprocessing import FunctionTransformer
 
 # CAT_FEATURES = [
